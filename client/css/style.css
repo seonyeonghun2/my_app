@@ -1,0 +1,29 @@
+@charset "utf-8";
+.text_center {
+    text-align: center
+}
+.underlined {
+    text-decoration: underline;
+}
+.login_form {
+    margin: 0 auto
+}
+.login_form div {
+    margin: 10px 0
+}
+.w_30 {
+    width: 30%;
+}
+.d-flex {
+    display: flex;
+    justify-content: space-between
+}
+.gap-1 {
+    gap: 1rem
+}
+.flex-1 {
+    flex: 1
+}
+.flex-3 {
+    flex: 3
+}
