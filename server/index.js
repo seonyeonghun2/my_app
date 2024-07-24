@@ -8,12 +8,37 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+const users = [
+    {
+        idx: 1,
+        id: "test",
+        pw: "1234",
+        created: new Date("2024-07-20"),
+        email: "test@naver.com",
+        nick: "겁나 무서운 전사"
+    },
+    {
+        idx: 2,
+        id: "hello",
+        pw: "hello1004",
+        created: new Date("2024-07-22"),
+        email: "helloworld@naver.com",
+        nick: "헬로월드"
+    }
+];
+
 app.get('/', function(req, res) {
     res.sendFile(__dirname + "/public/home.html"); // 99% index.html
 });
 app.get('/main', function(req, res) {
     res.sendFile(__dirname + "/public/main.html");
 });
+app.post('/login', function(req, res) {
+    let {user_id, user_pw } = req.body; // 각각 id, pw 정보를 나누어서 저장
+    console.log(user_id, user_pw);
+    // 기본 회원 정보와 전송받은 정보를 비교 --> 일치 : 로그인 성공, 불일치 : 로그인 실패
+    // 첫 페이지로 이동시키거나, 경고를 하거나..후속조치
+})
 app.get('/chart', function(req, res) {
     res.json([
         {
