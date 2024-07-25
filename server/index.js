@@ -24,7 +24,15 @@ const users = [
         created: new Date("2024-07-22"),
         email: "helloworld@naver.com",
         nick: "헬로월드"
-    }
+    },
+    {
+        idx: 3,
+        id: "tutor",
+        pw: "tutor1004",
+        created: new Date("2024-07-25"),
+        email: "my_tutor@naver.com",
+        nick: "튜터admin"
+    },
 ];
 
 app.get('/', function(req, res) {
@@ -35,25 +43,22 @@ app.get('/main', function(req, res) {
 });
 app.post('/login', function(req, res) {
     let {user_id, user_pw } = req.body; // 각각 id, pw 정보를 나누어서 저장
-
+    console.log("login attempting : ", {user_id, user_pw});
     let foundUser = users.filter(user => user.id == user_id && user.pw == user_pw);
 
-    // console.log(foundUser);
+    console.log("logged user : ", foundUser);
+    console.log("logged user length : ", foundUser.length);
     
-    if (foundUser) {
-        // res.redirect("http://www.naver.com");
+    if (foundUser.length !== 0) {
         res.json({
             message: "login ok",
-            status: 200,
             isLogin: true,
             user: foundUser.nick,
-            redirect_url : "/home"
+            redirect_url : "contact.html"
         });
     } else {
-        res.json({
+        res.status(401).json({
             message: "login fail",
-            status: 400,
-            isLogin: false,
             user: null,
             redirect_url : null
         });
