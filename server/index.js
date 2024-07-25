@@ -35,7 +35,31 @@ app.get('/main', function(req, res) {
 });
 app.post('/login', function(req, res) {
     let {user_id, user_pw } = req.body; // 각각 id, pw 정보를 나누어서 저장
-    console.log(user_id, user_pw);
+
+    let foundUser = users.filter(user => user.id == user_id && user.pw == user_pw);
+
+    // console.log(foundUser);
+    
+    if (foundUser) {
+        // res.redirect("http://www.naver.com");
+        res.json({
+            message: "login ok",
+            status: 200,
+            isLogin: true,
+            user: foundUser.nick,
+            redirect_url : "/home"
+        });
+    } else {
+        res.json({
+            message: "login fail",
+            status: 400,
+            isLogin: false,
+            user: null,
+            redirect_url : null
+        });
+    }
+    
+
     // 기본 회원 정보와 전송받은 정보를 비교 --> 일치 : 로그인 성공, 불일치 : 로그인 실패
     // 첫 페이지로 이동시키거나, 경고를 하거나..후속조치
 })
